@@ -11,11 +11,19 @@ import java.util.List;
  */
 public class Burger {
 
-    public Bun bun;
-    public List<Ingredient> ingredients = new ArrayList<>();
+    private Bun bun;
+    private List<Ingredient> ingredients = new ArrayList<>();
 
-    public void setBuns(Bun bun) {
+    public void setBun(Bun bun) {
         this.bun = bun;
+    }
+
+    public Bun getBun() {
+        return bun;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     public void addIngredient(Ingredient ingredient) {
@@ -31,6 +39,9 @@ public class Burger {
     }
 
     public float getPrice() {
+        if (bun == null || ingredients.size()<=0){
+            throw new IllegalStateException("Burger must have ban and at least one ingredient.");
+        }
         float price = bun.getPrice() * 2;
 
         for (Ingredient ingredient : ingredients) {
@@ -41,6 +52,9 @@ public class Burger {
     }
 
     public String getReceipt() {
+        if (bun == null || ingredients.size()<=0){
+            throw new IllegalStateException("Burger must have ban and at least one ingredient.");
+        }
         StringBuilder receipt = new StringBuilder(String.format("(==== %s ====)%n", bun.getName()));
 
         for (Ingredient ingredient : ingredients) {
